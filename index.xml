@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Sat, 28 Jul 2018 23:41:25 -0700</lastBuildDate>
     
-        <atom:link href="https://darrenxyli.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://darrenxyli.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -17,9 +17,7 @@
       <pubDate>Sat, 28 Jul 2018 23:41:25 -0700</pubDate>
       
       <guid>https://darrenxyli.github.io/posts/third-year-after-work/</guid>
-      
-        <description>写在工作后的第三年 不长不短，三年。道家说，三是生数，可生万物。于是，我也希冀这是一个美好的开端，韶韶岁月余下的有限个三年的开端。 有点过于矫情</description>
-      
+      <description>写在工作后的第三年 不长不短，三年。道家说，三是生数，可生万物。于是，我也希冀这是一个美好的开端，韶韶岁月余下的有限个三年的开端。 有点过于矫情</description>
     </item>
     
     <item>
@@ -28,15 +26,13 @@
       <pubDate>Sat, 28 Jul 2018 22:24:50 -0700</pubDate>
       
       <guid>https://darrenxyli.github.io/about/</guid>
-      
-        <description>Education Master - Unversity at Buffalo - 2014&amp;frasl;2016, Buffalo
+      <description>Education Master - Unversity at Buffalo - 2014&amp;frasl;2016, Buffalo
 Bachelor - Beijing University of Posts and Telecommunications - 2010&amp;frasl;2014, Beijing
 Experience Senior Software Engineer - Apple - 2017, Cupertino
 Software Engineer - 4Info - 2016, San Mateo
 Software Intern - University of Rochester - 2015, Rochester
 Software Intern - App Annie - 2014, Beijing
 Research Assistant – Tsinghua University – 2013, Beijing</description>
-      
     </item>
     
   </channel>
