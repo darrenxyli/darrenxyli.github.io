@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Xinyang Li</title>
-    <link>https://darrenxyli.github.io/</link>
-    <description>Recent content on Xinyang Li</description>
+    <title>Essays on Xinyang Li</title>
+    <link>https://darrenxyli.github.io/essays/</link>
+    <description>Recent content in Essays on Xinyang Li</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 28 Jul 2018 23:41:25 -0700</lastBuildDate>
     
-	<atom:link href="https://darrenxyli.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://darrenxyli.github.io/essays/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -39,21 +39,6 @@
  适合：过多可能引入新的问题，过少可能不能解决问题，适合最恰当。 简单：简单代表了成本低，代表了容错度高，代表了可维护性强。 平衡：我们经常说的 Trade Off，权衡利弊和互换的性价比。   &amp;ldquo;我们喜欢知识纪律，不喜欢无知的无政府状态。&amp;rdquo; -《一个广告人的独白》 奥格威
  技术人的素质 先讲两个小故事，第一个故事，小说《斯通纳》，主角是一个平淡的大学文学教授，在外面世界战火纷飞时，始终把自己关在象牙塔，与一战相比微不足道的知识保护层里；第二个故事，某天当我们正激烈讨论着如何设计系统架构适应 Feed 流扩散机制时，一个玩着电吉他的物理学博士出身的程序员向我们抛出了一个流体力学传播模型。在这里并不想赞美技术人普遍拥有的良好素质，例如朴实、效率、逻辑等等，而是讲了斯通纳和物理学博士的故事。
 现在太多技术人，就是斯通纳，害怕外面的世界 - 无论是战火纷飞还是满地黄金。宁愿把自己困在知识的小牢房里，似乎一旦走出去，就会丧失自己的信仰，信仰的旗帜上写着&amp;rdquo;技术至上&amp;rdquo;。我觉得练功走火入魔可能就是这个意思。或者这只是我一人的偏见，作为技术人，是需要成为一个&amp;rdquo;T&amp;rdquo;型人才的。技术是门艺术，而艺术是美的，是可观赏揣摩的，正如康德提出的技术创造属于三个王国，其中一个便是美的王国，同样，技术也是具有哲学般的相通性，就如美丽的流体力学传播模型一样可以启发我们设计信息流传播的策略，又如经济学领域蒙代尔三角与理论计算领域布鲁尔三角的相似。说句怀古伤今的话，还是90年代的硅谷有意思啊！</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://darrenxyli.github.io/about/</link>
-      <pubDate>Sat, 28 Jul 2018 22:24:50 -0700</pubDate>
-      
-      <guid>https://darrenxyli.github.io/about/</guid>
-      <description>Education Master - Unversity at Buffalo - 2014&amp;frasl;2016, Buffalo
-Bachelor - Beijing University of Posts and Telecommunications - 2010&amp;frasl;2014, Beijing
-Experience Senior Software Engineer - Apple - 2017, Cupertino
-Software Engineer - 4Info - 2016, San Mateo
-Software Intern - University of Rochester - 2015, Rochester
-Software Intern - App Annie - 2014, Beijing
-Research Assistant – Tsinghua University – 2013, Beijing</description>
     </item>
     
   </channel>
