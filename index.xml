@@ -6,10 +6,19 @@
     <description>Recent content on Xinyang Li</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Jul 2018 23:41:25 -0700</lastBuildDate>
+    <lastBuildDate>Wed, 08 Aug 2018 18:56:14 -0700</lastBuildDate>
     
 	<atom:link href="https://darrenxyli.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>软件设计指导 简介</title>
+      <link>https://darrenxyli.com/posts/software-design-guideline-1/</link>
+      <pubDate>Wed, 08 Aug 2018 18:56:14 -0700</pubDate>
+      
+      <guid>https://darrenxyli.com/posts/software-design-guideline-1/</guid>
+      <description>随着程序的发展和获取更多功能，它变得复杂，其组件之间存在子依赖关系。随着时间的推移，复杂性会逐渐增加，程序员在修改系统时会将所有相关因素保留</description>
+    </item>
     
     <item>
       <title>写在工作后的第三年</title>
