@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 
+			
+  
+    <meta name="twitter:card" content="summary"/>
+    
+      <meta name="twitter:image" content="https://darrenxyli.com/images/avatar.png" />
+    
+  
+  
+  <meta name="twitter:title" content="程序化购买专题广告需求方平台DSP竞价流程"/>
+  <meta name="twitter:description" content="概要 作为 DSP 角色，当接受到由广告交易平台(ADX)发送来的竞价请求时，通常会根据一些业务需求、广告主要求、用户特征等，对请求进行过滤，从而决策"/>
+  
+    <meta name="twitter:site" content="@darrenxyli"/>
+  
+  
+  
+  
+    <meta name="twitter:creator" content="@Xinyang Li"/>
+  
+
+
+
+		
+		<meta name="author" content="Xinyang Li">
+		<meta name="description" content="Code, Arts, Readings">
+		<meta name="generator" content="Hugo 0.45.1" />
+		<title>程序化购买专题广告需求方平台DSP竞价流程 &middot; Xinyang Li</title>
+		<link rel="shortcut icon" href="https://darrenxyli.com/images/favicon.ico">
+		<link rel="stylesheet" href="https://darrenxyli.com/css/style.css">
+		<link rel="stylesheet" href="https://darrenxyli.com/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="https://darrenxyli.com/css/font-awesome.min.css">
+		
+
+		
+		<link href="https://darrenxyli.com/index.xml" rel="alternate" type="application/rss+xml" title="Xinyang Li" />
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='https://darrenxyli.com/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='https://darrenxyli.com/posts'>Archive</a>
+	<a href='https://darrenxyli.com/tags'>Tags</a>
+	<a href='https://darrenxyli.com/about'>About</a>
+	<a href='mailto:hi@darrenxyli.com?Subject=Hi Xinyang!'>Hi!</a>
+
+	
+
+	
+	<a class="cta" href="https://darrenxyli.com/index.xml">Subscribe</a>
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        程序化购买专题广告需求方平台DSP竞价流程
+                    </h1>
+                    <h2 class="headline">
+                    Aug 21, 2017 17:21
+                    · 1949 words
+                    · 4 minute read
+                      <span class="tags">
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                  
+                    <div id="toc">
+                      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#概要">概要</a></li>
+<li><a href="#具体流程">具体流程</a></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                  
+                
+                <section id="post-body">
+                    
+
+<h2 id="概要">概要</h2>
+
+<p>作为 DSP 角色，当接受到由广告交易平台(ADX)发送来的竞价请求时，通常会根据一些业务需求、广告主要求、用户特征等，对请求进行过滤，从而决策竞价与否。如果决定参与竞价，则会对请求特征连同自己的广告数据库、用户数据库等进行一系列的计算匹配，同时根据广告(Ads)、竞选(Campaign)、广告位(Placement)等的时长、已展示量等特征计算出竞价。以此逐步筛选，最终选出最优的广告以及竞选价格返回给广告交易平台。整个流程根据业界标准，SLA 通常需要在 200ms 内完成，同时考虑到网络通信的损耗，真正数据在 DSP 内部的用时不能超过 100ms。因为极高的 SLA 要求，所以对系统布局和算法提出了挑战。</p>
+
+<h2 id="具体流程">具体流程</h2>
+
+<ol>
+<li>接收竞价请求(Bid Request)
+我们以 OpenRTB v2.4 的竞价请求为例，如下图。</li>
+</ol>
+
+<pre><code class="language-json">{
+    &quot;id&quot;: &quot;DxU0032U8a&quot;,
+    &quot;at&quot;: 2,
+    &quot;allimps&quot;: 0,
+    &quot;imp&quot;: [
+        {
+            &quot;id&quot;: &quot;1&quot;,
+            &quot;banner&quot;: {
+                &quot;w&quot;: 320,
+                &quot;h&quot;: 50,
+                &quot;format&quot;: [
+                    {
+                        &quot;w&quot;: 320,
+                        &quot;h&quot;: 50
+                    }
+                ],
+                &quot;btype&quot;: [
+                    1,
+                    3
+                ],
+                &quot;battr&quot;: [
+                    1,
+                    3,
+                    5,
+                    6,
+                    8,
+                    9,
+                    10,
+                    11
+                ],
+                &quot;pos&quot;: 3,
+                &quot;mimes&quot;: [
+                    &quot;image/jpeg&quot;,
+                    &quot;image/png&quot;,
+                    &quot;image/gif&quot;
+                ],
+                &quot;api&quot;: []
+            },
+            &quot;ext&quot;: {
+                &quot;strictbannersize&quot;: 0
+            },
+            &quot;instl&quot;: 0,
+            &quot;displaymanager&quot;: &quot;SOMA&quot;,
+            &quot;tagid&quot;: &quot;101000415&quot;,
+            &quot;secure&quot;: 0
+        }
+    ],
+    &quot;device&quot;: {
+        &quot;geo&quot;: {
+            &quot;lat&quot;: 53.550003,
+            &quot;lon&quot;: 10,
+            &quot;ipservice&quot;: 3,
+            &quot;country&quot;: &quot;DEU&quot;,
+            &quot;region&quot;: &quot;04&quot;,
+            &quot;zip&quot;: &quot;20099&quot;,
+            &quot;metro&quot;: &quot;0&quot;,
+            &quot;city&quot;: &quot;Hamburg&quot;,
+            &quot;type&quot;: 2
+        },
+        &quot;make&quot;: &quot;Apple&quot;,
+        &quot;model&quot;: &quot;iPhone&quot;,
+        &quot;os&quot;: &quot;iOS&quot;,
+        &quot;osv&quot;: &quot;4.3.2&quot;,
+        &quot;ua&quot;: &quot;Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_2 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8H7 Safari/6533.18.5&quot;,
+        &quot;ip&quot;: &quot;95.90.255.47&quot;,
+        &quot;js&quot;: 0,
+        &quot;connectiontype&quot;: 0,
+        &quot;ifa&quot;: &quot;e4273e31-97a9-4b29-93a8-8a99f0cea068&quot;,
+        &quot;devicetype&quot;: 1
+    },
+    &quot;app&quot;: {
+        &quot;id&quot;: &quot;101000415&quot;,
+        &quot;name&quot;: &quot;OpenRTB_2_4_UATest_openRtb_2_4_iOS_XXLARGE_320x50_IAB1&quot;,
+        &quot;domain&quot;: &quot;example.com&quot;,
+        &quot;cat&quot;: [
+            &quot;IAB1&quot;
+        ],
+        &quot;storeurl&quot;: &quot;http://example.com&quot;,
+        &quot;keywords&quot;: &quot;&quot;,
+        &quot;publisher&quot;: {
+            &quot;id&quot;: &quot;1001028764&quot;,
+            &quot;name&quot;: &quot;OpenRTB_2_4_UATest_openRtb_2_4_iOS_XXLARGE_320x50_IAB1&quot;
+        }
+    },
+    &quot;user&quot;: {
+        &quot;keywords&quot;: &quot;&quot;
+    },
+    &quot;bcat&quot;: [
+        &quot;IAB17-18&quot;,
+        &quot;IAB7-42&quot;,
+        &quot;IAB23&quot;,
+        &quot;IAB7-28&quot;,
+        &quot;IAB26&quot;,
+        &quot;IAB25&quot;,
+        &quot;IAB9-9&quot;,
+        &quot;IAB24&quot;
+    ],
+    &quot;badv&quot;: [],
+    &quot;ext&quot;: {
+        &quot;udi&quot;: {
+        },
+        &quot;operaminibrowser&quot;: 0,
+        &quot;carriername&quot;: &quot;unknown - probably WLAN&quot;
+    },
+    &quot;regs&quot;: {
+        &quot;coppa&quot;: 0
+    }
+}
+</code></pre>
+
+<p>这个竞价请求来自于一个 iOS App，当我们深入这个请求结构可以发现，这是一个横幅广告(Banner Ad)，宽度 320px，高度 50px，来自一台 iOS 设备，操作系统是 4.3.2，地理坐标为经度 53.550003，纬度 10，邮政编码是20099，城市为Hamburg，用户的 IP 地址，以及这个 App 的信息例如名字、编号、域名、App Store 的地址、发行商等，同时竞价请求也包含了这个广告需要满足的类别，比如年龄的要求等。</p>
+
+<ol>
+<li>过滤(Filter)竞价请求
+再接收到竞价请求后，DSP 是否参与这次竞价一般会基于几个方面的考虑：</li>
+</ol>
+
+<p>1) 该请求是否在黑名单内？
+当作弊检测(Fraud Detection)发现，该请求属于有害请求或者无效请求，则需要选择性的过滤掉该竞价请求。作弊检测通常基于 IP 地址、用户设备 ID、地理位置以及 App 本身属性等特征进行判断。</p>
+
+<p>2) 是否参与该 ADX 的竞价？
+此选项往往基于业务的考虑，例如某些 ADX 平台的流量质量不佳或者利润抽成过高，都可能导致不参与竞价。</p>
+
+<p>3) 服务器集群是否过载？
+当遇到例如双 11或者感恩节时候，广告的竞价请求往往会出现持续的洪峰，如果不进行限流可能引起集群服务雪崩，从而影响正常业务。</p>
+
+<p>过滤竞价请求能够防止类似于机器人点击等作弊性质的刷量行为，有效保护了广告主的利益。同时遇到流量洪峰时，起到削峰整流的作用，保护正常业务的运转。</p>
+
+<ol>
+<li><p>预处理
+首先声明，并不是所有 DSP 都必须做预处理。或者说，预处理的内容完全取决于每家 DSP 的自身需求。在预处理阶段，DSP 可以对请求 App 或者网页的内容进行预爬取，然后提取一些 NLP 特征处理，或者有预先缓存好的网页特征，则可以直接提取插入到请求特征中。或者某些 DSP 拥有较大的用户数据库，则会对请求用户提取出预先计算好的用户特征段(Segments)出来以便后续计算。预处理主要目的是为了更好地定位受众(Audience Targeting)。</p></li>
+
+<li><p>筛选广告
+程序化购买的优势之一就在于精准投放。而体现了这一优势的地方就在于如何筛选广告。最基本的可以直接根据用户浏览的网页内容进行广告推荐，例如用户浏览汽车网站，则可以推荐汽车的品牌广告。如果做得精度更高，则可以对用户进行画像(Demographic)，对用户一系列的历史行为进行分析，例如最近一段时间去过哪些地方、购买过什么商品、浏览了什么网页，对用户的行为、喜好有清晰的刻画。</p></li>
+</ol>
+
+<p>以精准投放为目的，训练出一系列的算法模型，对于每个用户，可以在众多的广告库中筛选出用户最有可能感兴趣的一个，从而达到将广告推荐给有效用户的目的，进而提高点击率(CTR)和转化率(ROI)。无论是最基本的图片广告，还是最新的动态创意优化(DCP)，都是以此为基础发展的。</p>
+
+<ol>
+<li><p>定价
+实时竞价通常采用次价密封投标拍卖(Second-price sealed-bid auction)，所以如何既能中标又能以最低价格中标，成为定价阶段的主要目标，这些主要以博弈论为理论基础，我们就在此不赘述。除此之外，如何在竞选时间内平稳均匀地将广告展示(Impression)出去，而不是在竞选初期消耗掉大量展示量造成后期展示量不足，也是定价的次要目标，而业界通常以 Pacing 算法为原型，拓展出其他预算模型控制出价。</p></li>
+
+<li><p>返回竞价回复
+在筛选出最佳广告，需要把广告素材、追踪代码(Tracking Code)等渲染成网页代码，然后把网页代码、定价等等按照格式生成竞价回复，送返给 ADX。</p></li>
+</ol>
+
+<p>我们以 OpenRTB v2.4 的竞价回复为例，如下图。</p>
+
+<pre><code class="language-json">{
+ &quot;seatbid&quot;:[{
+    &quot;bid&quot;:[{
+        &quot;nurl&quot;:&quot;http://reports.ubimo.com/fb?b=JdZQFdbCARgKMURHWGhvUVl0bSMBJeAhAA&amp;c=MTo6&amp;wp=${AUCTION_PRICE}&quot;,
+        &quot;crid&quot;:&quot;12459&quot;,
+        &quot;adomain&quot;:[&quot;academy.com&quot;],
+        &quot;price&quot;:2.93,
+        &quot;id&quot;:&quot;1DGXhoQYtm&quot;,
+        &quot;adm&quot;:
+            &quot;&lt;ad xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:noNamespaceSchemaLocation=&quot;smaato_ad_v0.9.xsd&quot; modelVersion=&quot;0.9&quot;&gt;
+                &lt;imageAd&gt;
+                    &lt;clickUrl&gt;http://reports.ubimo.com/fb?b=JdZQFdbCARgKMURHWGhvUVl0bSMBJeAhAA&amp;amp;c=Mzo6&amp;amp;t=https%3A%2F%2Fad.doubleclick.net%2Fddm%2Fclk%2F292804678%3B119963336%3Bw%3Fhttp%3A%2F%2Fwww.academy.com%2Fwebapp%2Fwcs%2Fstores%2Fservlet%2FContainer_10151_10051_-1_%3Fname%3DOfficial_Rules%26uv%3Dvanity%3Aofficialrules
+                    &lt;/clickUrl&gt;
+                    &lt;imgUrl&gt;http://static.ubimo.com/io/603/ecd01dce
+                    &lt;/imgUrl&gt;
+                    &lt;height&gt;50&lt;/height&gt;
+                    &lt;width&gt;320&lt;/width&gt;
+                    &lt;beacons&gt;
+                        &lt;beacon&gt;http://reports.ubimo.com/fb?b=JdZQFdbCARgKMURHWGhvUVl0bSMBJeAhAA&amp;amp;c=Mjo6&lt;/beacon&gt;
+                        &lt;beacon&gt;https://ad.doubleclick.net/ddm/ad/N5865.276855.MOBILEFUSE/B8852634.119963336;sz=1x1;ord=1436319256367&lt;/beacon&gt;
+                    &lt;/beacons&gt;
+                &lt;/imageAd&gt;
+            &lt;/ad&gt;&quot;,
+        &quot;impid&quot;:&quot;1&quot;,
+        &quot;cid&quot;:5163
+    }]
+ }],
+ &quot;id&quot;:&quot;1DGXhoQYtm&quot;
+}
+</code></pre>
+
+<p>用请求数据流串联上上述所有的步骤，便如下图所示
+<img src="https://res.cloudinary.com/darrenxyli/image/upload/v1532982134/E5_B9_BF_E5_91_8A_E9_9C_80_E6_B1_82_E6_96_B9_E5_B9_B3_E5_8F_B0-DSP-_E7_AB_9E_E4_BB_B7_E6_B5_81_E7_A8_8B.png" alt="" /></p>
+
+                </section>
+            </article>
+
+            
+                <a class="twitter" href="https://twitter.com/intent/tweet?text=https%3a%2f%2fdarrenxyli.com%2fposts%2fprogramatic-buying-advertising-2%2f - %e7%a8%8b%e5%ba%8f%e5%8c%96%e8%b4%ad%e4%b9%b0%e4%b8%93%e9%a2%98%e5%b9%bf%e5%91%8a%e9%9c%80%e6%b1%82%e6%96%b9%e5%b9%b3%e5%8f%b0DSP%e7%ab%9e%e4%bb%b7%e6%b5%81%e7%a8%8b by @darrenxyli"><span class="icon-twitter"> tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+            
+
+            
+	    
+            
+	        <div id="git-comments"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  var gitment = new Gitment({
+    id: 'Programatic-Buying-Advertising-2',  
+    owner: 'darrenxyli',
+    repo: 'o',
+    oauth: {
+      client_id: '5295ff713dd170aeba6c',
+      client_secret: 'dfe6cd23a6554104e957b0acbfd56646a845ece3',
+    }
+  })
+  gitment.render('git-comments')
+</script>
+
+	    
+
+            
+
+            <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    <a class="symbol" href="mailto:hi@darrenxyli.com?Subject=Hi%20Xinyang!">
+        <i class="fa fa-envelope-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.facebook.com/darrenxyli">
+        <i class="fa fa-facebook-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.github.com/darrenxyli">
+        <i class="fa fa-github-square"></i>
+    </a>
+    
+    <a class="symbol" href="https://www.twitter.com/darrenxyli">
+        <i class="fa fa-twitter-square"></i>
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+       © Copyright 2018 <i class="fa fa-heart" aria-hidden="true"></i> Xinyang Li
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+	
+        <script src="https://darrenxyli.com/js/jquery-3.3.1.min.js"></script>
+<script src="https://darrenxyli.com/js/main.js"></script>
+<script src="https://darrenxyli.com/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+  
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-57576711-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+<script>
+var baiduAnalytics = 'ae285b4c7fed90df4b2ffbfaf07291b1';
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?" + baiduAnalytics;
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+    </body>
+</html>
