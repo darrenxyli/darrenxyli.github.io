@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://darrenxyli.com/posts/software-design-guideline-2/</loc>
+    <lastmod>2018-08-08T19:05:26-07:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://darrenxyli.com/posts/software-design-guideline-1/</loc>
     <lastmod>2018-08-08T18:56:14-07:00</lastmod>
   </url>
@@ -44,7 +49,7 @@
   
   <url>
     <loc>https://darrenxyli.com/posts/</loc>
-    <lastmod>2018-08-08T18:56:14-07:00</lastmod>
+    <lastmod>2018-08-08T19:05:26-07:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -55,25 +60,19 @@
   
   <url>
     <loc>https://darrenxyli.com/</loc>
-    <lastmod>2018-08-08T18:56:14-07:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://darrenxyli.com/tags/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/</loc>
-    <lastmod>2018-08-08T18:56:14-07:00</lastmod>
+    <lastmod>2018-08-08T19:05:26-07:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://darrenxyli.com/categories/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/</loc>
-    <lastmod>2018-08-08T18:56:14-07:00</lastmod>
+    <lastmod>2018-08-08T19:05:26-07:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://darrenxyli.com/tags/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E6%8C%87%E5%AF%BC/</loc>
-    <lastmod>2018-08-08T18:56:14-07:00</lastmod>
+    <lastmod>2018-08-08T19:05:26-07:00</lastmod>
     <priority>0</priority>
   </url>
   

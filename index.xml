@@ -6,13 +6,22 @@
     <description>Recent content on Xinyang Li</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Aug 2018 18:56:14 -0700</lastBuildDate>
+    <lastBuildDate>Wed, 08 Aug 2018 19:05:26 -0700</lastBuildDate>
     
 	<atom:link href="https://darrenxyli.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>软件设计指导 简介</title>
+      <title>软件设计指导-复杂性</title>
+      <link>https://darrenxyli.com/posts/software-design-guideline-2/</link>
+      <pubDate>Wed, 08 Aug 2018 19:05:26 -0700</pubDate>
+      
+      <guid>https://darrenxyli.com/posts/software-design-guideline-2/</guid>
+      <description>复杂性的定义 如果从现实的角度来定义复杂性，可以定义为下： 复杂性是任何与软件系统结构相关的，能够使得理解、修改该系统变得更加复杂和困难的事物。</description>
+    </item>
+    
+    <item>
+      <title>软件设计指导-简介</title>
       <link>https://darrenxyli.com/posts/software-design-guideline-1/</link>
       <pubDate>Wed, 08 Aug 2018 18:56:14 -0700</pubDate>
       
